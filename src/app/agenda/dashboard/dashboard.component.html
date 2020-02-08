@@ -66,12 +66,12 @@
         </div>
     </div>
     <br>
-    <div *ngIf="persons.length < 1" class="row my-5">
+    <div *ngIf="persons?.length < 1" class="row my-5">
         <div class="col">
             <h5 class="slide-in-fwd-center">You don't have people saved in the agenda yet</h5>
         </div>
     </div>
-    <div *ngIf="persons.length >= 1" class="row my-5">
+    <div *ngIf="persons?.length >= 1" class="row my-5">
         <div class="col" *ngFor="let person of persons; let i = index">
             <div class="card mx-2 my-2 slide-in-fwd-center">
                 <div class="card-header text-right h-56">
@@ -79,11 +79,12 @@
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{person.firstName}} {{person.lastName}}</h5>
-                  <p class="card-text">Age: {{person.age}}</p>
-                  <p class="card-text">Email: {{person.email}}</p>
-                  <button type="button" class="btn btn-primary" (click)="goToDetails(person)">Details</button>
+                  <small class="card-text"><strong>Age</strong>: {{person.age}}</small>
+                  <br>
+                  <small class="card-text"><strong>Email</strong>: {{person.email}}</small>
+                  <!--<button type="button" class="btn btn-primary" (click)="goToDetails(person)">Details</button>>-->
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 </div>
