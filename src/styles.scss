@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
+
 .slide-in-fwd-center {
 	-webkit-animation: slide-in-fwd-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-fwd-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -31,3 +39,100 @@
         opacity: 1;
     }
   }
+
+.puff-in-center {
+	-webkit-animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+	        animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+}
+
+@-webkit-keyframes puff-in-center {
+    0% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes puff-in-center {
+    0% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+
+.vibrate-1{
+	-webkit-animation: vibrate-1 0.3s linear infinite both;
+	        animation: vibrate-1 0.3s linear infinite both;
+}
+
+@-webkit-keyframes vibrate-1 {
+        0% {
+          -webkit-transform: translate(0);
+                  transform: translate(0);
+        }
+        20% {
+          -webkit-transform: translate(-2px, 2px);
+                  transform: translate(-2px, 2px);
+        }
+        40% {
+          -webkit-transform: translate(-2px, -2px);
+                  transform: translate(-2px, -2px);
+        }
+        60% {
+          -webkit-transform: translate(2px, 2px);
+                  transform: translate(2px, 2px);
+        }
+        80% {
+          -webkit-transform: translate(2px, -2px);
+                  transform: translate(2px, -2px);
+        }
+        100% {
+          -webkit-transform: translate(0);
+                  transform: translate(0);
+        }
+      }
+      @keyframes vibrate-1 {
+        0% {
+          -webkit-transform: translate(0);
+                  transform: translate(0);
+        }
+        20% {
+          -webkit-transform: translate(-2px, 2px);
+                  transform: translate(-2px, 2px);
+        }
+        40% {
+          -webkit-transform: translate(-2px, -2px);
+                  transform: translate(-2px, -2px);
+        }
+        60% {
+          -webkit-transform: translate(2px, 2px);
+                  transform: translate(2px, 2px);
+        }
+        80% {
+          -webkit-transform: translate(2px, -2px);
+                  transform: translate(2px, -2px);
+        }
+        100% {
+          -webkit-transform: translate(0);
+                  transform: translate(0);
+        }
+      }
+      

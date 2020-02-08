@@ -14,34 +14,53 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Fill in all the information below to add a new person</h5>
-                    <form>
-                        <div class="form-group">
+                    <form [formGroup]="personForm" (ngSubmit)="handlePerson()">
+                        <div class="form-group text-left">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName">
+                            <input formControlName="firstName" type="text" class="form-control form-control-sm" id="firstName">
                         </div>
-                        <div class="form-group">
+                        <div  class="form-group text-left">
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName">
+                            <input formControlName="lastName" type="text" class="form-control form-control-sm" id="lastName">
                         </div>
-                        <div class="form-group">
+                        <div  class="form-group text-left">
                             <label for="age">Age</label>
-                            <input type="number" class="form-control" id="age">
+                            <input formControlName="age" type="number" class="form-control form-control-sm" id="age">
                         </div>
-                        <div class="form-group">
+                        <div  class="form-group text-left">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input formControlName="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted text-center">We'll never share your email with anyone else.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save person</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!personForm.valid">
+                            <span *ngIf="true">Save person</span>
+                            <span *ngIf="false" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span *ngIf="false" class="sr-only">Loading...</span>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <br>
-    <div class="row h-100 my-5">
+    <div *ngIf="persons.length < 1" class="row my-5">
         <div class="col">
-            <h5 class="">You don't have people saved in the agenda yet</h5>
+            <h5 class="puff-in-center">You don't have people saved in the agenda yet</h5>
+        </div>
+    </div>
+    <div *ngIf="persons.length >= 1" class="row my-5">
+        <div class="col" *ngFor="let person of persons; let i = index">
+            <div class="card mx-2 my-2 puff-in-center" (click)="cardSelected(person)">
+                <div class="card-header text-right h-56">
+                    <button *ngIf="bPersonSelected" type="button" (click)="deletePerson(i)" class="btn btn-danger btn-sm puff-in-center vibrate-1"><strong>X</strong></button>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{person.firstName}} {{person.lastName}}</h5>
+                  <p class="card-text">Age: {{person.age}}</p>
+                  <p class="card-text">Email: {{person.email}}</p>
+                  <button type="button" class="btn btn-primary" (click)="goToDetails(person)">Details</button>
+                </div>
+              </div>
         </div>
     </div>
 </div>
