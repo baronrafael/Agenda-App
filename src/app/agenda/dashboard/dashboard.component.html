@@ -18,19 +18,42 @@
                         <div class="form-group text-left">
                             <label for="firstName">First Name</label>
                             <input formControlName="firstName" type="text" class="form-control form-control-sm" id="firstName">
+                            <ng-container *ngIf="personForm.controls.firstName.invalid && personForm.controls.firstName.touched">
+                                <small class="caption text-danger puff-in-center" *ngIf="personForm.controls.firstName.errors?.required">
+                                    First Name is required!
+                                </small>
+                            </ng-container>
                         </div>
                         <div  class="form-group text-left">
                             <label for="lastName">Last Name</label>
                             <input formControlName="lastName" type="text" class="form-control form-control-sm" id="lastName">
+                            <ng-container *ngIf="personForm.controls.lastName.invalid && personForm.controls.lastName.touched">
+                                <small class="caption text-danger puff-in-center" *ngIf="personForm.controls.lastName.errors?.required">
+                                    Last Name is required!
+                                </small>
+                            </ng-container>
                         </div>
                         <div  class="form-group text-left">
                             <label for="age">Age</label>
                             <input formControlName="age" type="number" class="form-control form-control-sm" id="age">
+                            <ng-container *ngIf="personForm.controls.age.invalid && personForm.controls.age.touched">
+                                <small class="caption text-danger puff-in-center" *ngIf="personForm.controls.age.errors?.required">
+                                  Age is required!
+                                </small>
+                            </ng-container>
                         </div>
                         <div  class="form-group text-left">
                             <label for="email">Email</label>
                             <input formControlName="email" type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp">
                             <small id="emailHelp" class="form-text text-muted text-center">We'll never share your email with anyone else.</small>
+                            <ng-container *ngIf="personForm.controls.email.invalid && personForm.controls.email.touched">
+                                <small class="caption text-danger puff-in-center" *ngIf="personForm.controls.email.errors?.required">
+                                  Email is required!
+                                </small>
+                                <small class="caption text-danger puff-in-center" *ngIf="personForm.controls.email.errors?.pattern">
+                                  Email should be the real one!
+                                </small>
+                            </ng-container>
                         </div>
                         <button type="submit" class="btn btn-primary" [disabled]="!personForm.valid">
                             <span *ngIf="true">Save person</span>
@@ -50,9 +73,9 @@
     </div>
     <div *ngIf="persons.length >= 1" class="row my-5">
         <div class="col" *ngFor="let person of persons; let i = index">
-            <div class="card mx-2 my-2 puff-in-center" (click)="cardSelected(person)">
+            <div class="card mx-2 my-2 puff-in-center">
                 <div class="card-header text-right h-56">
-                    <button *ngIf="bPersonSelected" type="button" (click)="deletePerson(i)" class="btn btn-danger btn-sm puff-in-center vibrate-1"><strong>X</strong></button>
+                    <button type="button" (click)="deletePerson(i)" class="btn btn-danger btn-sm"><strong>X</strong></button>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{person.firstName}} {{person.lastName}}</h5>
