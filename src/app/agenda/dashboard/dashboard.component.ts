@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../../core/models/person';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
   emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -26,11 +27,11 @@ export class DashboardComponent implements OnInit {
       age: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(this.emailRegEx)]]
     });
-    this.persons = [];
+    this.persons = this.storageService.getPersons();
   }
 
   handlePerson(){
-    this.persons.push(this.personForm.value);
+    this.storageService.savePerson(this.personForm.value);
     this.personForm.reset();
   }
 
@@ -45,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
   deletePerson(i){
     //event.cancelBubble = true;
-    this.persons.splice(i, 1);
+    this.storageService.deletePerson(i);
   }
 
 }
