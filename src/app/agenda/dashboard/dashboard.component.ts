@@ -12,7 +12,8 @@ export class DashboardComponent implements OnInit {
 
   personForm: FormGroup;
   persons: Array<Person>;
-  bPersonSelected: boolean = false;
+  //This regular expression for emails is much better than the one that the Validators brings by default
+  emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(
     private formBuilder: FormBuilder
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       age: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', [Validators.required, Validators.pattern(this.emailRegEx)]]
     });
     this.persons = [];
   }
@@ -34,19 +35,17 @@ export class DashboardComponent implements OnInit {
   }
 
   cardSelected(person){
-    this.bPersonSelected = !this.bPersonSelected;
     console.log(person);
   }
 
   goToDetails(person){
-    event.cancelBubble = true;
+    //event.cancelBubble = true;
     console.log(person);
   }
 
   deletePerson(i){
-    event.cancelBubble = true;
+    //event.cancelBubble = true;
     this.persons.splice(i, 1);
-    this.bPersonSelected = !this.bPersonSelected;
   }
 
 }
